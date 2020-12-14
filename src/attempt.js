@@ -201,8 +201,39 @@
 //   });
 // }
 // console.log(getIdentityMatrix(5));
-function getIntervalArray(start, end) {
-  const arr = new Array(end + 1 - start).fill(0);
-  return arr.map((item, index) => item + start + index);
+// function getIntervalArray(start, end) {
+//   const arr = new Array(end + 1 - start).fill(0);
+//   return arr.map((item, index) => item + start + index);
+// }
+// console.log(getIntervalArray(-2, 2));
+// function timeSpanToString(startDate, endDate) {
+//   let delta = endDate.getTime() - startDate.getTime();
+//   const res = [];
+//   function addZero(num) {
+//     return num < 10 ? `0${num}` : num;
+//   }
+//   function addTwoZeros(num) {
+//     if (num < 100) {
+//       return `00${num}`;
+//     }
+//     return num < 10 ? `0${num}` : num;
+//   }
+//   for (let i = 2; i >= 0; i -= 1) {
+//     const val = Math.floor(delta / ((60 ** i) * 1000));
+//     delta -= val * ((60 ** i) * 1000);
+//     res.push(val);
+//   }
+//   return `${addZero(res[0])}:${addZero(res[1])}:${addZero(res[2])}.${addTwoZeros(delta)}`;
+// }
+// console.log(timeSpanToString(new Date(2000, 1, 1, 10, 0, 0), new Date(2000, 1, 1, 10, 30, 0)));
+
+// function angleBetweenClockHands(date) {
+//   const angle = Math.abs(0.5 * (60 * (date.getUTCHours() % 12) - 11 * date.getUTCMinutes()));
+//   return angle < 180 ? angle * (Math.PI / 180) : (360 - angle) * (Math.PI / 180);
+// }
+// console.log(angleBetweenClockHands(new Date(Date.UTC(2016, 3, 5, 21, 0))));
+
+function getRegexForGuid() {
+  return /(\w){8}-(\w){4}-(\w){4}-(\w){4}-(\w){12}/g;
 }
-console.log(getIntervalArray(-2, 2));
+console.log('21EC2020-3AEA-4069-A2DD-08002B30309D'.match(getRegexForGuid()));
