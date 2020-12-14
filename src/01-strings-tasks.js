@@ -52,7 +52,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-  return `${firstName} ${lastName}`;
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -66,7 +66,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-  return value.slice(7, value.length - 1);
+  const arr = value.split(' ');
+  return `${arr[1]} ${arr[2].slice(0, -1)}`;
 }
 
 
@@ -130,8 +131,10 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const start = str.indexOf(value);
+  const end = start + value.length;
+  return str.slice(0, start).concat(str.slice(end, str.length));
 }
 
 /**
@@ -206,8 +209,49 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  function header(w) {
+    let str = '';
+    for (let i = 0; i < w; i += 1) {
+      if (i === 0) {
+        str += '\u250C';
+      } else if (i === w - 1) {
+        str += '\u2510\n';
+      } else {
+        str += '\u2500';
+      }
+    }
+    return str;
+  }
+  function body(w, h) {
+    let str = '';
+    for (let j = 1; j < h - 1; j += 1) {
+      for (let i = 0; i < w; i += 1) {
+        if (i === 0) {
+          str += '\u2502';
+        } else if (i === w - 1) {
+          str += '\u2502\n';
+        } else {
+          str += ' ';
+        }
+      }
+    }
+    return str;
+  }
+  function footer(w) {
+    let str = '';
+    for (let i = 0; i < w; i += 1) {
+      if (i === 0) {
+        str += '\u2514';
+      } else if (i === w - 1) {
+        str += '\u2518\n';
+      } else {
+        str += '\u2500';
+      }
+    }
+    return str;
+  }
+  return `${header(width)}${body(width, height)}${footer(width)}`;
 }
 
 
@@ -227,8 +271,20 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let cipher = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i].charCodeAt() >= 65 && str[i].charCodeAt() <= 90) {
+      cipher += str[i].charCodeAt() - 65 < 13 ? String.fromCharCode(str[i].charCodeAt() + 13)
+        : String.fromCharCode(str[i].charCodeAt() - 13);
+    } else if (str[i].charCodeAt() >= 97 && str[i].charCodeAt() <= 122) {
+      cipher += str[i].charCodeAt() - 97 < 13 ? String.fromCharCode(str[i].charCodeAt() + 13)
+        : String.fromCharCode(str[i].charCodeAt() - 13);
+    } else {
+      cipher += str[i];
+    }
+  }
+  return cipher;
 }
 
 /**
@@ -273,8 +329,13 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = [
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return cards.indexOf(value);
 }
 
 
