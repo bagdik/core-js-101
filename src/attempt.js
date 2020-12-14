@@ -233,7 +233,14 @@
 // }
 // console.log(angleBetweenClockHands(new Date(Date.UTC(2016, 3, 5, 21, 0))));
 
-function getRegexForGuid() {
-  return /(\w){8}-(\w){4}-(\w){4}-(\w){4}-(\w){12}/g;
+// function getRegexForGuid() {
+//   return /(\w){8}-(\w){4}-(\w){4}-(\w){4}-(\w){12}/g;
+// }
+// console.log('21EC2020-3AEA-4069-A2DD-08002B30309D'.match(getRegexForGuid()));
+
+function getPolynom(...rest) {
+  const [c, b, a] = rest.reverse();
+  console.log(c, b, a);
+  return rest.length === 0 ? null : (x) => (a || 0) * x ** 2 + (b || 0) * x + (c || 0);
 }
-console.log('21EC2020-3AEA-4069-A2DD-08002B30309D'.match(getRegexForGuid()));
+console.log(getPolynom(2, 3)(0));
