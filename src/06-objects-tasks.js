@@ -58,8 +58,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-  const r = Object.create(proto, JSON.parse(json));
-  return r();
+  return Object.create(proto, JSON.parse(json));
 }
 
 

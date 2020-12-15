@@ -181,18 +181,12 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-  let first = str[0];
-  for (let i = 1; i < str.length; i += 1) {
-    for (let j = i + 1; j < str.length; j += 1) {
-      if (first === str[j]) {
-        first = null;
-        break;
-      } else {
-        first = str[i];
-      }
-    }
+  const arr = str.split('');
+  for (let i = 0; i < str.length; i += 1) {
+    const filteredArr = arr.filter((item) => item === str[i]);
+    if (filteredArr.length === 1) return str[i];
   }
-  return first;
+  return null;
 }
 
 
@@ -281,8 +275,8 @@ function isCreditCardNumber(ccn) {
   const ccnToStr = String(ccn);
   let sum = 0;
   const arr = ccnToStr.split('').reverse().map((item, index) => {
-    if (index % 2 === 0) {
-      return +item * 2 > 9 ? +item * 2 - 1 : +item * 2;
+    if ((index + 1) % 2 === 0) {
+      return +item * 2 > 9 ? +item * 2 - 9 : +item * 2;
     }
     return +item;
   });
@@ -362,8 +356,15 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let res = '';
+  let a = num;
+  while (a >= n) {
+    res += a % n;
+    a = Math.floor(a / n);
+  }
+  res += a;
+  return res.split('').reverse().join('');
 }
 
 
@@ -403,13 +404,20 @@ function getCommonDirectoryPath(/* pathes */) {
  *
  */
 function getMatrixProduct(m1, m2) {
+  const m = m1.length; // count of strings m1
+  const k = m1[0].length; //  count of columns m1
+  const s = m2.length; // count of strings m2
+  const n = m2[0].length; //  count of columns m2
+  if (k !== s) return null;
   const matrix = [];
-  for (let i = 0; i < m1.length; i += 1) {
+  for (let i = 0; i < m; i += 1) {
     const row = [];
-    for (let j = 0; j < m2[0].length; j += 1) {
-      let c = 0;
-      c += m1[i][j] * m2[j][i];
-      row.push(c);
+    for (let j = 0; j < n; j += 1) {
+      let elem = 0;
+      for (let r = 0; r < k; r += 1) {
+        elem += m1[i][r] * m2[r][j];
+      }
+      row.push(elem);
     }
     matrix.push(row);
   }

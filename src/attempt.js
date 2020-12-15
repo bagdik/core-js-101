@@ -238,9 +238,80 @@
 // }
 // console.log('21EC2020-3AEA-4069-A2DD-08002B30309D'.match(getRegexForGuid()));
 
-function getPolynom(...rest) {
-  const [c, b, a] = rest.reverse();
-  console.log(c, b, a);
-  return rest.length === 0 ? null : (x) => (a || 0) * x ** 2 + (b || 0) * x + (c || 0);
+// function getPolynom(...rest) {
+//   const [c, b, a] = rest.reverse();
+//   console.log(c, b, a);
+//   return rest.length === 0 ? null : (x) => (a || 0) * x ** 2 + (b || 0) * x + (c || 0);
+// }
+// console.log(getPolynom(2, 3)(0));
+// function getMatrixProduct(m1, m2) {
+//   const m = m1.length; // count of strings m1
+//   const k = m1[0].length; //  count of columns m1
+//   const s = m2.length; // count of strings m2
+//   const n = m2[0].length; //  count of columns m2
+//   if (k !== s) return null;
+//   const matrix = [];
+//   for (let i = 0; i < m; i += 1) {
+//     const row = [];
+//     for (let j = 0; j < n; j += 1) {
+//       let elem = 0;
+//       for (let r = 0; r < k; r += 1) {
+//         elem += m1[i][r] * m2[r][j];
+//       }
+//       row.push(elem);
+//     }
+//     matrix.push(row);
+//   }
+//   return matrix;
+// }
+
+// const a = [[1, 0, 0],
+//   [0, 1, 0],
+//   [0, 0, 1]];
+// const b = [[1, 2, 3],
+//   [4, 5, 6],
+//   [7, 8, 9]];
+
+// console.log(getMatrixProduct(a, b));
+// function toNaryString(num, n) {
+//   let res = '';
+//   let a = num;
+//   while (a >= n) {
+//     res += a % n;
+//     a = Math.floor(a / n);
+//     console.log('a:', a);
+//     console.log('res:', res, '\n +++');
+//   }
+//   res = a + res;
+//   return res;
+// }
+// console.log(toNaryString(365, 2));
+// function isCreditCardNumber(ccn) {
+//   const ccnToStr = String(ccn);
+//   let sum = 0;
+//   const arr = ccnToStr.split('').reverse().map((item, index) => {
+//     console.log('item before: ', item);
+//     if ((index + 1) % 2 === 0) {
+//       console.log('item cond in: ', item);
+//       return +item * 2 > 9 ? +item * 2 - 9 : +item * 2;
+//     }
+//     console.log('item cond out: ', item);
+//     return +item;
+//   });
+//   for (let i = 0; i < arr.length; i += 1) {
+//     sum += arr[i];
+//   }
+//   console.log(sum);
+//   return sum % 10 === 0;
+// }
+// console.log(isCreditCardNumber(79927398713));
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  for (let i = 0; i < str.length; i += 1) {
+    const filteredArr = arr.filter((item) => item === str[i]);
+    console.log('i: ', i, 'fArr: ', filteredArr);
+    if (filteredArr.length === 1) return str[i];
+  }
+  return null;
 }
-console.log(getPolynom(2, 3)(0));
+console.log(findFirstSingleChar('The quick brown fox jumps over the lazy dog'));
